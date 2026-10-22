@@ -8,13 +8,10 @@ class TestMainPage:
     def test_main_page_logout_removes_username(self, main_page_loged_in):
         main_page_loged_in.find_element(
             *MainPageLocators.logout_button).click()
-        username = WebDriverWait(main_page_loged_in, GET_WEB_ELEMENT_TIMEOUT).until(
-            expected_conditions.invisibility_of_element_located(MainPageLocators.username))
-        profile_photo = WebDriverWait(main_page_loged_in, GET_WEB_ELEMENT_TIMEOUT).until(
-            expected_conditions.invisibility_of_element_located(MainPageLocators.profile_photo))
-        login_button = WebDriverWait(main_page_loged_in, GET_WEB_ELEMENT_TIMEOUT).until(
+        assert WebDriverWait(main_page_loged_in, GET_WEB_ELEMENT_TIMEOUT).until(
+            expected_conditions.invisibility_of_element_located(MainPageLocators.username)) and WebDriverWait(main_page_loged_in, GET_WEB_ELEMENT_TIMEOUT).until(
+            expected_conditions.invisibility_of_element_located(MainPageLocators.profile_photo)) and WebDriverWait(main_page_loged_in, GET_WEB_ELEMENT_TIMEOUT).until(
             expected_conditions.visibility_of_element_located(MainPageLocators.login_and_registration_button))
-        assert username and profile_photo and login_button
 
     def test_add_adv_logged_out_user_login_form_appears(self, main_page):
         main_page.find_element(

@@ -12,12 +12,8 @@ class TestLoginPage:
             *LoginPageLocators.password_input).send_keys(existing_creds.get('password'))
         login_page.find_element(
             *LoginPageLocators.login_button).click()
-        username = WebDriverWait(login_page, GET_WEB_ELEMENT_TIMEOUT).until(
-            expected_conditions.visibility_of_element_located(MainPageLocators.username))
-        profile_photo = WebDriverWait(login_page, GET_WEB_ELEMENT_TIMEOUT).until(
-            expected_conditions.visibility_of_element_located(MainPageLocators.profile_photo))
-        login_popup_is_invisible = WebDriverWait(login_page, GET_WEB_ELEMENT_TIMEOUT).until(
+        assert WebDriverWait(login_page, GET_WEB_ELEMENT_TIMEOUT).until(
+            expected_conditions.visibility_of_element_located(MainPageLocators.username)).is_displayed() and WebDriverWait(login_page, GET_WEB_ELEMENT_TIMEOUT).until(
+            expected_conditions.visibility_of_element_located(MainPageLocators.profile_photo)).is_displayed() and WebDriverWait(login_page, GET_WEB_ELEMENT_TIMEOUT).until(
             expected_conditions.invisibility_of_element_located(
                 LoginPageLocators.login_title))
-        assert username.is_displayed() and profile_photo.is_displayed(
-        ) and login_popup_is_invisible
